@@ -7,6 +7,6 @@ remote=u0_a147@192.168.1.103
 ssh $remote -p 8022 "./reload.sh"
 
 # Executa o rsync
-rsync -avz .  $remote:server --exclude=node_modules
+rsync -avz .  $remote:server --exclude-from=./commands/syncExclude.txt
 
 ssh $remote -p 8022 "cd server && yarn"
