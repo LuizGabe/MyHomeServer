@@ -1,0 +1,21 @@
+{
+  "name": "servidor",
+  "version": "1.0.0",
+  "main": "main.js",
+  "author": "LuizGabe",
+  "license": "MIT",
+  "dependencies": {
+    "@types/express": "^4.17.15",
+    "@types/node": "*",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "pm2": "^5.2.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  },
+  "scripts": {
+    "start": "nodemon src/main.ts",
+    "sync": "./commands/sync.sh",
+    "syncStart": "yarn sync && ssh u0_a147@192.168.1.103 -p 8022 \"cd server && yarn start\""
+  }
+}
