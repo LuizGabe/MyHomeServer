@@ -4,11 +4,13 @@ const configFile = 'src/config/dbConnect.json';
 
 function createConfigFile() {
   let config = {
-    "host": "host",
-    "username": "user",
-    "password": "password",
-    "dialect": "dialect",
-    "database": "database"
+    "db": {
+      "host": "host",
+      "username": "user",
+      "password": "password",
+      "dialect": "dialect",
+      "database": "database"
+    }
   }
   writeFileSync(configFile, JSON.stringify(config, null, 2));
   // TODO: Add code to log in to your database 
