@@ -3,7 +3,7 @@ import getConfig from '../config/configCondition.mjs';
 
 const config = getConfig()
 
-const sequelize = new Sequelize(config);
+const sequelize = new Sequelize(config.db);
 
 sequelize
   .authenticate()
