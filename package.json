@@ -10,12 +10,19 @@
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
     "pm2": "^5.2.2",
-    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.1.2",
     "typescript": "^4.9.4"
   },
   "scripts": {
-    "start": "nodemon src/main.ts",
+    "start:dev": "nodemon src/main.mjs",
+    "start": "node src/main.mjs",
+    "start:server": "./commands/startServer.sh",
+    "killNode": "pkill -f 'node'",
+
     "sync": "./commands/sync.sh",
     "syncStart": "yarn sync && ssh u0_a147@192.168.1.103 -p 8022 \"cd server && yarn start\""
+  },
+  "devDependencies": {
+    "@types/nodemon": "^1.19.2"
   }
 }

@@ -1,14 +1,12 @@
 import express from 'express';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
-import TemperatureData from './interfaces/temperatureData';
 
 const app = express()
-let count: number = 0
-let temperatureData: TemperatureData[] = []
+let count = 0
+let temperatureData = []
 
 // configuração
 const config = {
-  ip: 'localhost',
   port: 5000,
   temperatureFile: 'temperatureData.json',
   helloEndpoint: '/hello',
@@ -22,7 +20,7 @@ app.get(config.helloEndpoint, (req, res) => {
 
 app.get(`${config.temperatureEndpoint}/latest`, (req, res) => {
   if (existsSync(config.temperatureFile)) {
-    temperatureData = JSON.parse(readFileSync(config.temperatureFile).toString()) as TemperatureData[];
+    temperatureData = JSON.parse(readFileSync(config.temperatureFile).toString())
     temperatureData.sort((a, b) => new Date(b.dateHour).valueOf() - new Date(a.dateHour).valueOf());
     res.json(temperatureData[0]);
   } else {
@@ -64,7 +62,7 @@ router.get(`/:number`, (req, res) => {
 router.post(``, (req, res) => {
   req.on('data', (data) => {
     // parseando os dados JSON de entrada
-    const incomingData: any = JSON.parse(data)
+    const incomingData = JSON.parse(data)
     // adicionando o DateHour aos dados de entrada
     const date = new Date()
     incomingData.dateHour = new Date(date.setUTCHours(date.getUTCHours() - 3)).toISOString()
