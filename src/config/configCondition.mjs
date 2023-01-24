@@ -5,7 +5,7 @@ const configFile = 'src/config/dbConnect.json';
 function createConfigFile() {
   let config = {
     "host": "host",
-    "user": "user",
+    "username": "user",
     "password": "password",
     "dialect": "dialect",
     "database": "database"
