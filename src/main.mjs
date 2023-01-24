@@ -1,8 +1,9 @@
 import express from 'express';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
+import helloRouter from './routes/hello.mjs';
 
 const app = express()
-let count = 0
+
 let temperatureData = []
 
 // configuração
@@ -13,10 +14,7 @@ const config = {
   temperatureEndpoint: '/temperature'
 }
 
-app.get(config.helloEndpoint, (req, res) => {
-  res.statusCode = 200
-  res.send(`Hello World! ${count++}`)
-})
+app.use('/hello', helloRouter)
 
 app.get(`${config.temperatureEndpoint}/latest`, (req, res) => {
   if (existsSync(config.temperatureFile)) {
