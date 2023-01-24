@@ -9,7 +9,9 @@
     "@types/node": "*",
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
+    "mariadb": "^3.0.2",
     "pm2": "^5.2.2",
+    "sequelize": "^6.28.0",
     "tsconfig-paths": "^4.1.2",
     "typescript": "^4.9.4"
   },
@@ -18,7 +20,6 @@
     "start": "node src/main.mjs",
     "start:server": "./commands/startServer.sh",
     "killNode": "pkill -f 'node'",
-
     "sync": "./commands/sync.sh",
     "syncStart": "yarn sync && ssh u0_a147@192.168.1.103 -p 8022 \"cd server && yarn start\""
   },
