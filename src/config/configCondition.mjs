@@ -10,6 +10,9 @@ function createConfigFile() {
       "password": "password",
       "dialect": "dialect",
       "database": "database"
+    },
+    "main": {
+      "port": "port"
     }
   }
   writeFileSync(configFile, JSON.stringify(config, null, 2));
