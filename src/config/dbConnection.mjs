@@ -6,7 +6,7 @@ const config = getConfig()
 const sequelize = new Sequelize(config.db);
 
 sequelize
-  .authenticate()
+  .authenticate({logging: false})
   .then(() => {
     // TODO: Add code to log in to your database
   })
