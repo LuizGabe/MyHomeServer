@@ -20,8 +20,7 @@
     "start": "node src/main.mjs",
     "start:server": "./commands/startServer.sh",
     "killNode": "pkill -f 'node'",
-    "sync": "./commands/sync.sh",
-    "syncStart": "yarn sync && ssh u0_a147@192.168.1.103 -p 8022 \"cd server && yarn start\""
+    "sync": "./commands/sync.sh"
   },
   "devDependencies": {
     "@types/nodemon": "^1.19.2"
