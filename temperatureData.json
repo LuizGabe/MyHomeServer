@@ -1,0 +1,22 @@
+[
+  {
+    "humidity": 44,
+    "temperature": 27.6,
+    "dateHour": "2023-01-24T15:39:40.695Z"
+  },
+  {
+    "humidity": 45,
+    "temperature": 28,
+    "dateHour": "2023-01-24T15:40:14.429Z"
+  },
+  {
+    "humidity": 43,
+    "temperature": 29.3,
+    "dateHour": "2023-01-24T15:41:39.831Z"
+  },
+  {
+    "humidity": 43,
+    "temperature": 29.8,
+    "dateHour": "2023-01-24T15:42:02.876Z"
+  }
+]
