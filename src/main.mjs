@@ -2,12 +2,6 @@ import express from 'express';
 import helloRouter from './routes/hello.mjs';
 import temperatureRouter from './routes/temperature.mjs';
 import getConfig from './config/configCondition.mjs';
-import Temperature from './models/temperature/temperature.mjs';
-
-// Create table if not exists
-Temperature.sequelize.sync({logging: false}).then(() => {
-  console.log('Tabela de temperatura criada com sucesso.');
-})
 
 const config = getConfig().main
 
