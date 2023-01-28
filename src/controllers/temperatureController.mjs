@@ -1,5 +1,9 @@
 import { lastData, limitData, allData, byId } from "../models/temperature/select.mjs";
 import { insertData } from "../models/temperature/insert.mjs";
+import Logger from "../logs/logger.mjs";
+const { logError } = new Logger();
+
+const path = 'temperatureController'
   
 const getAll = (req, res) => {
   allData().then(data => {
@@ -12,6 +16,8 @@ const getById = (req, res) => {
 
   byId(id).then(data => {
     res.status(200).json(data);
+  }).catch(err => {
+    logError(err, path)
   })
 }
 
@@ -19,32 +25,29 @@ const getLimitData = (req, res) => {
   const { start, limit } = req.query;
 
   limitData(parseInt(start), parseInt(limit)).then(data => {
-    console.log(data)
-    res.json(data)
+    res.status(200).json(data)
   }).catch(err => {
-    // TODO: Add code to getLatestData error log
+    logError(err, path)
   })
 }
 
 const getLatestData = (req, res) => {
   lastData().then(data => {
-    res.json(data)
+    res.status(201).json(data)
   }).catch(err => {
-    // TODO: Add code to getLatestData error log
+    logError(err, path)
   })
 }
 
 const createData = (req, res) => {
   req.on('data', (data) => {
-
     const jsonData = JSON.parse(data)
 
     const date = new Date()
     jsonData.dateHour = new Date(date.setUTCHours(date.getUTCHours() - 3)).toISOString()
 
     insertData(jsonData)
-    res.statusCode = 200
-    res.send('Dados de temperatura recebidos e salvos no arquivo.')
+    res.status(200).send(['Dados Inseridos com Sucesso!', jsonData])
   })
 }
 

@@ -1,11 +1,11 @@
 import Logger from "../logs/logger.mjs"
+const { logInfo } = new Logger()
 
 let count = 0
 
-const prinHello = (req, res) => {
-  Logger.logInfo('hello', __filename)
-  res.statusCode = 200
+const printHello = (req, res) => {
+  logInfo(`Hello World! ${count++}`, 'helloController')
   res.send(`Hello World! ${count++}`)
 }
 
-export { prinHello }
+export { printHello }
