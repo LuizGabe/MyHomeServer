@@ -1,4 +1,6 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs';
+import Logger from '../logs/logger.mjs';
+const { logWarning } = new Logger()
 
 const configFile = 'src/config/dbConnect.json';
 
@@ -16,7 +18,7 @@ function createConfigFile() {
     }
   }
   writeFileSync(configFile, JSON.stringify(config, null, 2));
-  // TODO: Add code to log in to your database 
+  logWarning('Arquivo de configuração criado, edite o arquivo e reinicie o servidor!', 'dbConnection');
 }
 
 export default function getConfig() {
@@ -24,5 +26,6 @@ export default function getConfig() {
     return JSON.parse(readFileSync(configFile).toString());
   } else {
     createConfigFile()
+    process.exit(1)
   }
 }
