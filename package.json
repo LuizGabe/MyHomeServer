@@ -5,11 +5,15 @@
   "author": "LuizGabe",
   "license": "MIT",
   "dependencies": {
+    "@types/chai": "^4.3.4",
     "@types/express": "^4.17.15",
     "@types/node": "*",
+    "axios": "^1.2.6",
+    "chai": "^4.3.7",
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
     "mariadb": "^3.0.2",
+    "mocha": "^10.2.0",
     "pm2": "^5.2.2",
     "sequelize": "^6.28.0",
     "tsconfig-paths": "^4.1.2",
@@ -20,7 +24,8 @@
     "start": "node src/main.mjs",
     "start:server": "./commands/startServer.sh",
     "killNode": "pkill -f 'node'",
-    "sync": "./commands/sync.sh"
+    "sync": "./commands/sync.sh",
+    "test": "mocha --recursive --extensions *.test.mjs src/tests"
   },
   "devDependencies": {
     "@types/nodemon": "^1.19.2"
