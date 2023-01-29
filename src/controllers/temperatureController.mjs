@@ -33,7 +33,7 @@ const getLimitData = (req, res) => {
 
 const getLatestData = (req, res) => {
   lastData().then(data => {
-    res.status(201).json(data)
+    res.status(200).json(data)
   }).catch(err => {
     logError(err, path)
   })
