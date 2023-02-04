@@ -1,7 +1,21 @@
 # Meu Servidor Doméstico
 
-## Introduction
+## Introdução
 Este backend é responsável por coletar os dados de temperatura de um dispositivo ESP01 e armazená-los em um banco de dados. As informações são facilmente acessíveis através das rotas disponíveis, listadas abaixo.
+
+## Começo Rápido
+### Comandos Principais
+Para começar a utilizar este backend, você precisa seguir alguns passos:
+> Lembre-se: Para rodar esse servidor você deve executar um banco de dados, e configura-lo no arquivo `src/config/dbConnect.json`, se ele não existir, o servidor irá cria-lo ao executar na primeira vez.
+
+1. Entre na pasta do projeto: `cd ./MyHomeServer`
+2. Instale as dependências do projeto, utilizando o comando: `yarn`
+3. Inicie o servidor, utilizando o comando: `yarn start`.
+
+### Comandos de Desenvolvimento
+- Execute os testes, utilizando o comando: `yarn test`
+- Mande o código para o servidor local via ssh: `yarn sync`
+> Configure o servidor ssh, no arquivo `commands/sync.sh`, eu utilizei um método não muito conhecido, mas é assim, ele executa um arquivo no servidor que exclui a pasta do server e cria novamente, ai depois manda o codigo para a pasta server novamente com as alterações, e por ultimo instala as dependencias do projeto
 
 ## Rotas
 #### /hello
