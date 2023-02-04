@@ -1,11 +1,11 @@
-import Temperature from "./temperature.mjs";
+import Weather from "./weather.mjs";
 
 const allData = async () => {
-  return Temperature.findAll();
+  return Weather.findAll();
 }
 
 const byId = async (id) => {
-  return Temperature.findOne({
+  return Weather.findOne({
     where: {
       id: id
     }
@@ -13,14 +13,14 @@ const byId = async (id) => {
 }
 
 const limitData = async (start, limit) => {
-  return Temperature.findAll({
+  return Weather.findAll({
     offset: start,
     limit: limit
   })
 }
 
 const lastData = async () => {
-  return Temperature.findOne({
+  return Weather.findOne({
     order: [['id', 'DESC']]
   })
 }

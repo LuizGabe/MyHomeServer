@@ -1,7 +1,7 @@
 import db from "../../config/dbConnection.mjs";
 import Sequelize from "../../config/dbConnection.mjs";
 
-const Temperature = db.define('temperature', {
+const Weather = db.define('weather', {
   id: {
     type: "SERIAL",
     primaryKey: true
@@ -24,4 +24,4 @@ const Temperature = db.define('temperature', {
 
 Sequelize.sync({logging: false})
 
-export default Temperature
+export default Weather
