@@ -1,4 +1,4 @@
-import { getLatestData, createData, getAll, getById, getLimitData } from "../controllers/weatherController.mjs";
+import { getLatestData, createData, getAll, getById, getLimitData } from "../controllers/temperatureController.mjs";
 import express from "express";
 
 const router = express.Router();

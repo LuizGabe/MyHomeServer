@@ -1,7 +1,7 @@
 import db from "../../config/dbConnection.mjs";
 import Sequelize from "../../config/dbConnection.mjs";
 
-const Weather = db.define('Weather', {
+const Temperature = db.define('temperature', {
   id: {
     type: "SERIAL",
     primaryKey: true
@@ -22,12 +22,6 @@ const Weather = db.define('Weather', {
   timestamps: false
 });
 
-Weather.associate = models => {
-  Weather.belongsTo(models.Devices, {
-    foreignKey: 'deviceId'
-  })
-}
-
 Sequelize.sync({logging: false})
 
-export default Weather
+export default Temperature
