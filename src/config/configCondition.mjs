@@ -18,7 +18,7 @@ function createConfigFile() {
     }
   }
   writeFileSync(configFile, JSON.stringify(config, null, 2));
-  logWarning('Arquivo de configuração criado, edite o arquivo e reinicie o servidor!', 'dbConnection');
+  logWarning('Arquivo de configuração criado, edite o arquivo e reinicie o servidor!', 'configCondition');
 }
 
 export default function getConfig() {
