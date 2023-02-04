@@ -1,9 +1,9 @@
-import { lastData, limitData, allData, byId } from "../models/temperature/select.mjs";
-import { insertData } from "../models/temperature/insert.mjs";
+import { lastData, limitData, allData, byId } from "../models/weather/select.mjs";
+import { insertData } from "../models/weather/insert.mjs";
 import Logger from "../logs/logger.mjs";
-const { logError } = new Logger();
+const { logSuccess, logError } = new Logger()
 
-const path = 'temperatureController'
+const path = 'weatherController'
   
 const getAll = (req, res) => {
   allData().then(data => {
@@ -41,12 +41,18 @@ const getLatestData = (req, res) => {
 
 const createData = (req, res) => {
   req.on('data', (data) => {
+    
     const jsonData = JSON.parse(data)
 
     const date = new Date()
     jsonData.dateHour = new Date(date.setUTCHours(date.getUTCHours() - 3)).toISOString()
 
-    insertData(jsonData)
+    insertData(jsonData).then(() => {
+      logSuccess('Salvo no temperature com sucesso', path)
+    }).catch(err => {
+      logError(err, path)
+    })
+
     res.status(200).send(['Dados Inseridos com Sucesso!', jsonData])
   })
 }
