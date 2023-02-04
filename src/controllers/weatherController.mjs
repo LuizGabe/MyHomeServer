@@ -1,9 +1,9 @@
-import { lastData, limitData, allData, byId } from "../models/temperature/select.mjs";
-import { insertData } from "../models/temperature/insert.mjs";
+import { lastData, limitData, allData, byId } from "../models/weather/select.mjs";
+import { insertData } from "../models/weather/insert.mjs";
 import Logger from "../logs/logger.mjs";
 const { logError } = new Logger();
 
-const path = 'temperatureController'
+const path = 'weatherController'
   
 const getAll = (req, res) => {
   allData().then(data => {
