@@ -10,8 +10,8 @@ const app = express()
 // Hello Endpoint
 app.use('/hello', helloRouter)
 
-// Temperature Endpoint
-app.use('/temperature', weatherRouter)
+// Weather Endpoint
+app.use('/weather', weatherRouter)
 
 app.listen(config.port, () => {
   console.log(`Servidor iniciado em http://localhost:${config.port}`)

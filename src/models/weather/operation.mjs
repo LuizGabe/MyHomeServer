@@ -9,7 +9,7 @@ function Operations() {
     return Weather.findAll();
   }
 
-  const seachById = async (id) => {
+  const searchById = async (id) => {
     return Weather.findOne({
       where: {
         id: id
@@ -19,7 +19,7 @@ function Operations() {
 
   const searchStartLimit = async (start, limit) => {
     return Weather.findAll({
-      offset: start,
+      offset: start-1,
       limit: limit
     })
   }
@@ -34,7 +34,7 @@ function Operations() {
   
   return {
     all,
-    seachById,
+    searchById,
     searchStartLimit,
     latest,
     create

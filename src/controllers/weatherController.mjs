@@ -1,12 +1,14 @@
-import { lastData, limitData, allData, byId } from "../models/weather/select.mjs";
-import { insertData } from "../models/weather/insert.mjs";
+import weatherOperation from "../models/weather/operation.mjs";
 import Logger from "../logs/logger.mjs";
-const { logError } = new Logger();
+
+const Weather = weatherOperation()
 
 const path = 'weatherController'
-  
+
+const { logError } = new Logger();
+
 const getAll = (req, res) => {
-  allData().then(data => {
+  Weather.all().then(data => {
     res.status(200).json(data);
   })
 }
@@ -14,7 +16,7 @@ const getAll = (req, res) => {
 const getById = (req, res) => {
   const id = req.params.number;
 
-  byId(id).then(data => {
+  Weather.searchById(id).then(data => {
     res.status(200).json(data);
   }).catch(err => {
     logError(err, path)
@@ -24,7 +26,7 @@ const getById = (req, res) => {
 const getLimitData = (req, res) => {
   const { start, limit } = req.query;
 
-  limitData(parseInt(start), parseInt(limit)).then(data => {
+  Weather.searchStartLimit(parseInt(start), parseInt(limit)).then(data => {
     res.status(200).json(data)
   }).catch(err => {
     logError(err, path)
@@ -32,7 +34,7 @@ const getLimitData = (req, res) => {
 }
 
 const getLatestData = (req, res) => {
-  lastData().then(data => {
+  Weather.latest().then(data => {
     res.status(200).json(data)
   }).catch(err => {
     logError(err, path)
@@ -40,14 +42,24 @@ const getLatestData = (req, res) => {
 }
 
 const createData = (req, res) => {
+  console.time('createData')
   req.on('data', (data) => {
     const jsonData = JSON.parse(data)
 
-    const date = new Date()
-    jsonData.dateHour = new Date(date.setUTCHours(date.getUTCHours() - 3)).toISOString()
+    jsonData.dateHour = new Date(new Date().setUTCHours(new Date().getUTCHours() - 3)).toISOString()
 
-    insertData(jsonData)
-    res.status(200).send(['Dados Inseridos com Sucesso!', jsonData])
+    Weather.create(jsonData).then(data => {
+      if(data.id != null) {
+        res.status(200).json(data)
+        console.timeEnd('createData')
+      } else {
+        Weather.latest().then(data => {
+          res.status(200).json(data)
+          console.timeEnd('createData')
+        })
+      }
+      
+    })
   })
 }
 
