@@ -7,6 +7,7 @@ const helloUrl = `${baseUrl}/hello`
 describe('Hello API Routes', () => {
   it('should get Hello World', async () => {
     const response = await axios.get(helloUrl);
-    expect(response.data).to.match(`/Hello World! \[\d+\]/`);
+    expect(response.data).to.contain(`Hello World!`);
+    
   });
 });

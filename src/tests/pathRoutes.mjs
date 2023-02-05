@@ -1,4 +1,4 @@
-const ip = '192.168.1.104'
+const ip = '192.168.1.119'
 const port = 5000
 
 // BaseUrl 
