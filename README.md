@@ -37,8 +37,8 @@ Para começar a utilizar este backend, você precisa seguir alguns passos:
 
 ## ESP01, com sensor de temperatura/umidade:
 ### V1: 
-<img align="left"  width="250" src="https://i.ibb.co/D8KrcRW/20230203-203557.jpg">
-<img width="250" src="https://i.ibb.co/nngnxtP/20230203-203517.jpg">
+<img align="left"  width="250" src="./public/V1/picture1.jpeg">
+<img width="250" src="./public/V1/picture2.jpeg">
 
 ## Feito por:
 [
