@@ -1,22 +1,21 @@
-import Logger from "../logs/logger.mjs"
-const { logError } = new Logger()
-
-const path = 'utilities/cache'
-
 const Cache = (() => {
   const cacheAtual = {}
 
   const set = (key, value) => {
-    if (!key | !value) logError('key or value is null', path)
+    if (!key | !value) return null
     cacheAtual[key.toLowerCase()] = value
   }
 
   const get = (key) => {
-    if (!cacheAtual[key]) logError('key not found', path)
-    return cacheAtual[key.toLowerCase()] || null
+    if (!cacheAtual[key]) return null
+    return cacheAtual[key.toLowerCase()]
   }
 
-  return { set, get }
+  const getAll = () => {
+    return cacheAtual
+  }
+
+  return { set, get, getAll }
 })()
 
 export default Cache;
