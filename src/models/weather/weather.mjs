@@ -22,6 +22,6 @@ const Weather = db.define('weather', {
   timestamps: false
 });
 
-Sequelize.sync({logging: false})
+Sequelize.sync()
 
 export default Weather

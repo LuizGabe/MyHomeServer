@@ -8,10 +8,10 @@ const config = getConfig()
 
 const path = 'dbConnection';
 
-const sequelize = new Sequelize(config.db);
+const sequelize = new Sequelize(config.db)
 
 sequelize
-.authenticate({logging: false})
+.authenticate()
 .then(() => {
   logSuccess('Conexão com o banco de dados realizada com sucesso', path)
 })
@@ -19,7 +19,7 @@ sequelize
   logError(err, path)
 });
 
-sequelize.sync({logging: false}).then(() => {
+sequelize.sync().then(() => {
   logSuccess('Tabelas sincronizadas com sucesso', path)
 })
 

@@ -11,7 +11,8 @@ function createConfigFile() {
       "username": "user",
       "password": "password",
       "dialect": "dialect",
-      "database": "database"
+      "database": "database",
+      "logging": false
     },
     "main": {
       "port": "port"

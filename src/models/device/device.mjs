@@ -6,14 +6,15 @@ const Device = db.define('Device', {
     type: "SERIAL",
     primaryKey: true
   },
-  macAdress: {
+  macAddress: {
       type: 'VARCHAR(17)',
       allowNull: false
   }
 }, {
-  timestamps: false
+  timestamps: false,
+  tableName: 'Device'
 })
 
-Sequelize.sync({logging: false})
+Sequelize.sync()
 
 export default Device
