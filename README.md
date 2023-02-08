@@ -1,7 +1,7 @@
 # Meu Servidor Doméstico
 
 ## Introdução
-Este backend é responsável por coletar os dados de temperatura de um dispositivo ESP01 e armazená-los em um banco de dados. As informações são facilmente acessíveis através das rotas disponíveis, listadas abaixo.
+Este backend é responsável por coletar os dados de temperatura de um dispositivo ESP01 e armazená-los em um banco de dados. 
 
 ## Começo Rápido
 ### Comandos Principais
@@ -21,7 +21,7 @@ Para começar a utilizar este backend, você precisa seguir alguns passos:
 #### /hello
 - `GET` - retorna um Hello World, e um numero que vai acrescentando conforme as requests
 
-#### /temperature
+#### /weather
 - `GET /latest` - retorna o último dado de temperatura coletado
 - `GET /all` - retorna todos os dados de temperatura coletados
 - `GET /id/:number` - retorna o dado de temperatura com o ID especificado
@@ -29,18 +29,16 @@ Para começar a utilizar este backend, você precisa seguir alguns passos:
 - `POST /` - cria um novo dado de temperatura
 
 ## To Do
-- [ ] Colocar as imagens em uma fonte mais segura
+- [x] Implementar armazenamento em cache para otimizar o tempo de resposta
+- [x] Adicionar suporte para múltiplos dispositivos ESP01
+- [x] Colocar as imagens em uma fonte mais segura
 - [ ] Criar uma página web para visualizar o último dado de temperatura
-- [ ] Implementar armazenamento em cache para otimizar o tempo de resposta
-- [ ] Adicionar suporte para múltiplos dispositivos ESP01
+- [ ] Refazer a função save() no `weatherController.mjs` para salvar na tabela **Weather** com relacionamento com **Devices**
 
 ## ESP01, com sensor de temperatura/umidade:
 ### V1: 
 <img align="left"  width="250" src="https://i.ibb.co/D8KrcRW/20230203-203557.jpg">
 <img width="250" src="https://i.ibb.co/nngnxtP/20230203-203517.jpg">
-
-
-
 
 ## Feito por:
 [
