@@ -9,7 +9,7 @@ const Device = deviceOperation()
 
 const path = 'weatherController'
 
-const { logError, logSuccess, logInfo, logWarning, logDescribe } = new Logger();
+const { logError, logDescribe } = new Logger();
 
 const getAll = (req, res) => {
   Weather.all().then(data => {
@@ -60,15 +60,17 @@ const createData = (req, res) => {
         deviceData = Cache.get('device').find((device) => device.macAddress === macAddress)
       } else {
         const data = await Device.all()
-        Cache.set('device', data)
+        const dadosRetornados = data.map(obj => obj.dataValues) || []
+        Cache.set('device', dadosRetornados)
         deviceData = data.find((device) => device.macAddress === macAddress)
       }
       if (deviceData) {
         save(jsonData, deviceData.id)
       } else {
         const newDevice = await Device.create({ macAddress })
-        newDevice.dataValues.id = newDevice.null
-        Cache.get('device').push(newDevice)
+        const cacheAtual = Cache.get('device')
+        cacheAtual.push(newDevice.dataValues)
+        Cache.set('device', cacheAtual)
         save(jsonData, newDevice.id)
       }
     } else {
@@ -76,31 +78,17 @@ const createData = (req, res) => {
     }
     
     function save(jsonData, id) {
-      let resposta = {
-        id:id,...jsonData
-      }
-      logDescribe('Resposta', resposta)
-      console.timeEnd('createData')
-      res.status(200).json(resposta)
+      jsonData.dateHour = new Date(new Date().setUTCHours(new Date().getUTCHours() - 3)).toISOString()
+      jsonData.deviceId = id
+      Weather.create(jsonData).then((data) => {
+        logDescribe('Response', data.dataValues)
+        console.timeEnd('createData')
+        res.status(200).json(data.dataValues)
+      }).catch(err => {
+        res.status(400).send(err)
+        logError(err, path)
+      })
     }
-    // function save (jsonData, id) {
-    //   jsonData.deviceId = id
-    //   jsonData.dateHour = new Date(new Date().setUTCHours(new Date().getUTCHours() - 3)).toISOString()
-
-    //   Weather.create(jsonData).then(data => {
-    //     if(data.id != null) {
-    //       res.status(200).json(data)
-    //       console.timeEnd('createData')
-    //     } else {
-    //       Weather.latest().then(data => {
-    //         res.status(200).json(data)
-    //         console.timeEnd('createData')
-    //       })
-    //     }
-        
-    //   })
-    // }
-
   })
 }
 
