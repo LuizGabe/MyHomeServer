@@ -1,3 +1,4 @@
+import ip from 'ip'
 import express from 'express';
 import helloRouter from './routes/hello.mjs';
 import weatherRouter from './routes/weather.mjs';
@@ -14,5 +15,5 @@ app.use('/hello', helloRouter)
 app.use('/weather', weatherRouter)
 
 app.listen(config.port, () => {
-  console.log(`Servidor iniciado em http://localhost:${config.port}`)
+  console.log(`Servidor iniciado em http://${ip.address()}:${config.port}`)
 })
