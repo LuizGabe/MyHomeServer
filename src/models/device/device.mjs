@@ -1,9 +1,9 @@
 import db from "../../config/dbConnection.mjs";
-import Sequelize from "../../config/dbConnection.mjs";
 
 const Device = db.define('Device', {
   id: {
-    type: "SERIAL",
+    type: "INTEGER",
+    autoIncrement: true,
     primaryKey: true
   },
   macAddress: {
@@ -12,9 +12,7 @@ const Device = db.define('Device', {
   }
 }, {
   timestamps: false,
-  tableName: 'Device'
+  tableName: 'device'
 })
-
-Sequelize.sync()
 
 export default Device
