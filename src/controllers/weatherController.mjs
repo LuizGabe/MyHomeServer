@@ -56,30 +56,22 @@ const createData = (req, res) => {
 
     if (isValidMacAddress(macAddress)) {
       let deviceData
-      if (Cache.get('device') != null) {
-        deviceData = Cache.get('device').find((device) => device.macAddress === macAddress)
-      } else {
+      if (Cache.get('device') == null) {
         const data = await Device.all()
         const dadosRetornados = data.map(obj => obj.dataValues) || []
         Cache.set('device', dadosRetornados)
         deviceData = data.find((device) => device.macAddress === macAddress)
-      }
-      if (deviceData) {
-        save(jsonData, deviceData.id)
       } else {
-        const newDevice = await Device.create({ macAddress })
-        const cacheAtual = Cache.get('device')
-        cacheAtual.push(newDevice.dataValues)
-        Cache.set('device', cacheAtual)
-        save(jsonData, newDevice.id)
+        deviceData = Cache.get('device').find((device) => device.macAddress === macAddress)
       }
-    } else {
-      res.status(404).send('Add MacAddress in Header and try again')
-    }
-    
-    function save(jsonData, id) {
+      if (!deviceData) {
+        deviceData = await Device.create({ macAddress })
+        const cacheAtual = Cache.get('device')
+        cacheAtual.push(deviceData.dataValues)
+        Cache.set('device', cacheAtual)
+      }
       jsonData.dateHour = new Date(new Date().setUTCHours(new Date().getUTCHours() - 3)).toISOString()
-      jsonData.deviceId = id
+      jsonData.deviceId = deviceData.id
       Weather.create(jsonData).then((data) => {
         logDescribe('Response', data.dataValues)
         console.timeEnd('createData')
@@ -88,6 +80,8 @@ const createData = (req, res) => {
         res.status(400).send(err)
         logError(err, path)
       })
+    } else {
+      res.status(404).send('Add MacAddress in Header and try again')
     }
   })
 }
